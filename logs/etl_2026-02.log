@@ -1,0 +1,52 @@
+=== ETL START Mon Feb  2 03:00:09 CET 2026 ===
+Saved raw AKTIN to /Users/hudanurbilgic/Projects/DWH/data/raw/aktin/Notaufnahmesurveillance_Zeitreihen_Syndrome.tsv (23249216 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_01.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_02.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_03.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_04.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_05.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_06.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_07.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_08.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_09.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_10.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_11.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/air_temperature_mean/regional_averages_tm_12.txt (26488 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_01.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_02.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_03.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_04.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_05.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_06.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_07.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_08.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_09.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_10.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_11.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/precipitation/regional_averages_rr_12.txt (24023 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_01.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_02.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_03.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_04.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_05.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_06.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_07.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_08.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_09.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_10.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_11.txt (12613 bytes)
+Saved /Users/hudanurbilgic/Projects/DWH/data/raw/dwd/sunshine_duration/regional_averages_sd_12.txt (12613 bytes)
+Saved processed AKTIN monthly to /Users/hudanurbilgic/Projects/DWH/data/processed/aktin_monthly.csv
+Saved processed weather to /Users/hudanurbilgic/Projects/DWH/data/processed/weather_monthly_de.csv
+   year  month  temperature_mean  precipitation  sunshine_duration
+0  1951      1              1.47           77.2               30.9
+1  1951      2              1.85           45.7               57.3
+2  1951      3              2.23           66.7              110.1
+3  1951      4              7.28           40.4              199.1
+4  1951      5             11.52           69.8              203.3
+Rows: 900 | Years: 1951-2025
+✅ LOAD DONE
+  - dim inserts attempted (unique values): syndrom=5, altersgruppe=9, edtype=3, datum(months)=85
+  - facts upserted: 8875
+  - rows skipped (missing keys): 0
+=== ETL END Mon Feb  2 03:10:16 CET 2026 ===
