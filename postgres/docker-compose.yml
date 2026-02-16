@@ -24,5 +24,28 @@ services:
     depends_on:
       - db
 
+  superset:
+    image: apache/superset:latest
+    container_name: superset
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_SECRET_KEY: "a-very-long-random-string"
+    volumes:
+      - superset_home:/app/superset_home
+    command: >
+      /bin/bash -c "
+      superset db upgrade &&
+      superset fab create-admin
+        --username admin --firstname Superset --lastname Admin
+        --email admin@example.com --password admin || true &&
+      superset init &&
+      gunicorn --bind 0.0.0.0:8088 --workers 2 --timeout 120 'superset.app:create_app()'
+      "
+
 volumes:
   pgdata:
+  superset_home:
