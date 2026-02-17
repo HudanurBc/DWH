@@ -1,6 +1,41 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+pick_flag() {
+  # usage: pick_flag "<help_text>" "<longflag>" "<shortflag>"
+  local help_txt="$1"
+  local longflag="$2"
+  local shortflag="$3"
+  if echo "$help_txt" | grep -q -- "$longflag"; then
+    echo "$longflag"
+  else
+    echo "$shortflag"
+  fi
+}
+
+run_import() {
+  # usage: run_import "<command>" "<file_or_dir>" "<username>"
+  local cmd="$1"
+  local path="$2"
+  local user="$3"
+
+  local help_txt
+  if ! help_txt="$($cmd --help 2>&1)"; then
+    echo "!!! ERROR: '$cmd --help' failed. Command not available?"
+    return 1
+  fi
+
+  local user_flag path_flag
+  user_flag="$(pick_flag "$help_txt" "--username" "-u")"
+  path_flag="$(pick_flag "$help_txt" "--path" "-p")"
+
+  echo "    -> using flags: ${path_flag} ${user_flag}"
+  $cmd ${path_flag} "$path" ${user_flag} "$user"
+}
+
+echo "==> Superset: version"
+superset version || true
+
 echo "==> Superset: db upgrade"
 superset db upgrade
 
@@ -15,29 +50,42 @@ superset fab create-admin \
 echo "==> Superset: init"
 superset init
 
-echo "==> Import datasources (optional)"
+echo "==> DEBUG: assets present?"
+ls -lah /app/assets || true
+ls -lah /app/assets/dashboards || true
+ls -lah /app/assets/datasources || true
+
+# ---- 1) DB Connection via YAML (stabiler als datasources.zip) ----
+echo "==> Import DB connection from /app/assets/database.yaml (preferred)"
+if [ -f /app/assets/database.yaml ]; then
+  if ! run_import "superset import-datasources" "/app/assets/database.yaml" "${SUPERSET_ADMIN_USER}"; then
+    # fallback underscore (falls dein Build das so nennt)
+    run_import "superset import_datasources" "/app/assets/database.yaml" "${SUPERSET_ADMIN_USER}"
+  fi
+else
+  echo "    No /app/assets/database.yaml found, skipping."
+fi
+
+# ---- 2) Optional: datasources.zip (nur wenn dein ZIP-Format kompatibel ist) ----
+echo "==> Import datasources.zip (optional)"
 if [ -f /app/assets/datasources/datasources.zip ]; then
-  echo "    Found /app/assets/datasources/datasources.zip"
-  # Superset CLI command names differ slightly across versions/builds.
-  # Try underscore version first, then dash version.
-  superset import_datasources -p /app/assets/datasources/datasources.zip -u "${SUPERSET_ADMIN_USER}" || \
-  superset import-datasources -p /app/assets/datasources/datasources.zip -u "${SUPERSET_ADMIN_USER}" || true
+  if ! run_import "superset import-datasources" "/app/assets/datasources/datasources.zip" "${SUPERSET_ADMIN_USER}"; then
+    run_import "superset import_datasources" "/app/assets/datasources/datasources.zip" "${SUPERSET_ADMIN_USER}"
+  fi
 else
   echo "    No datasources.zip found, skipping."
 fi
 
-echo "==> Import dashboards (optional)"
+# ---- 3) Dashboard import ----
+echo "==> Import dashboard zip"
 if [ -f /app/assets/dashboards/my_dashboard.zip ]; then
-  echo "    Found /app/assets/dashboards/my_dashboard.zip"
-  # Same story: command/flags differ by version.
-  # Try a couple of common variants.
-  superset import_dashboards --path /app/assets/dashboards/my_dashboard.zip --username "${SUPERSET_ADMIN_USER}" || \
-  superset import-dashboards -p /app/assets/dashboards/my_dashboard.zip -u "${SUPERSET_ADMIN_USER}" || true
+  if ! run_import "superset import-dashboards" "/app/assets/dashboards/my_dashboard.zip" "${SUPERSET_ADMIN_USER}"; then
+    run_import "superset import_dashboards" "/app/assets/dashboards/my_dashboard.zip" "${SUPERSET_ADMIN_USER}"
+  fi
 else
-  echo "    No dashboard zip found, skipping."
+  echo "    No /app/assets/dashboards/my_dashboard.zip found, skipping."
 fi
 
-# OPTIONAL sanity output
 echo "==> Superset users:"
 superset fab list-users || true
 
