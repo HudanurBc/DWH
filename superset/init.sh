@@ -66,16 +66,6 @@ else
   echo "    No /app/assets/database.yaml found, skipping."
 fi
 
-# ---- 2) Optional: datasources.zip (nur wenn dein ZIP-Format kompatibel ist) ----
-echo "==> Import datasources.zip (optional)"
-if [ -f /app/assets/datasources/datasources.zip ]; then
-  if ! run_import "superset import-datasources" "/app/assets/datasources/datasources.zip" "${SUPERSET_ADMIN_USER}"; then
-    run_import "superset import_datasources" "/app/assets/datasources/datasources.zip" "${SUPERSET_ADMIN_USER}"
-  fi
-else
-  echo "    No datasources.zip found, skipping."
-fi
-
 # ---- 3) Dashboard import ----
 echo "==> Import dashboard zip"
 if [ -f /app/assets/dashboards/my_dashboard.zip ]; then
