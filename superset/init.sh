@@ -14,12 +14,28 @@ superset fab create-admin \
 
 echo "==> Superset: init"
 superset init
-# Import DB connection / datasources (idempotent)
-#if [ -f /app/import/datasources.zip ]; then
-# echo "==> Importing Superset datasources (DB connections)..."
- # superset import-datasources /app/import/datasources.zip || true
-#fi
 
+echo "==> Import datasources (optional)"
+if [ -f /app/assets/datasources/datasources.zip ]; then
+  echo "    Found /app/assets/datasources/datasources.zip"
+  # Superset CLI command names differ slightly across versions/builds.
+  # Try underscore version first, then dash version.
+  superset import_datasources -p /app/assets/datasources/datasources.zip -u "${SUPERSET_ADMIN_USER}" || \
+  superset import-datasources -p /app/assets/datasources/datasources.zip -u "${SUPERSET_ADMIN_USER}" || true
+else
+  echo "    No datasources.zip found, skipping."
+fi
+
+echo "==> Import dashboards (optional)"
+if [ -f /app/assets/dashboards/my_dashboard.zip ]; then
+  echo "    Found /app/assets/dashboards/my_dashboard.zip"
+  # Same story: command/flags differ by version.
+  # Try a couple of common variants.
+  superset import_dashboards --path /app/assets/dashboards/my_dashboard.zip --username "${SUPERSET_ADMIN_USER}" || \
+  superset import-dashboards -p /app/assets/dashboards/my_dashboard.zip -u "${SUPERSET_ADMIN_USER}" || true
+else
+  echo "    No dashboard zip found, skipping."
+fi
 
 # OPTIONAL sanity output
 echo "==> Superset users:"
@@ -31,4 +47,3 @@ exec gunicorn \
   --workers 2 \
   --timeout 120 \
   "superset.app:create_app()"
-
