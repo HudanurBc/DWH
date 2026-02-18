@@ -25,11 +25,13 @@ Beispielwerte sind bereits enthalten:
 
 falls die .env geändert wird, dann auch /superset/assets/database.yaml anpassen
 
+```bash
 databases:
   - database_name: DWH
     sqlalchemy_uri: postgresql+psycopg2://admin:passwort@db:5432/mydb #anpassen
     expose_in_sqllab: true
     allow_run_async: false
+```
 
 beachte: wenn die .env geändert wird, dann scheitert der Import des Dashboards auf Superset
 
@@ -40,6 +42,9 @@ beachte: wenn die .env geändert wird, dann scheitert der Import des Dashboards 
 Zu beachten ist, dass Superset mindestens 60 Sekunden braucht, um zu starten, da Healthchecks durchgeführt werden.
 Superset ist erreichbar unter:
 http://localhost:8088/superset/welcome/
+
+username: admin
+passwort: admin
 
 Im Projektroot ausführen:
 
