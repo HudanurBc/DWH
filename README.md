@@ -23,6 +23,14 @@ Beispielwerte sind bereits enthalten:
 - Adminer: `ADMINER_PORT`
 - Superset: `SUPERSET_PORT`, `SUPERSET_SECRET_KEY`, `SUPERSET_ADMIN_*`
 
+falls die .env geändert wird, dann auch /superset/assets/database.yaml anpassen
+
+databases:
+  - database_name: DWH
+    sqlalchemy_uri: postgresql+psycopg2://admin:passwort@db:5432/mydb #anpassen
+    expose_in_sqllab: true
+    allow_run_async: false
+
 ---
 
 ## Installation / Start
