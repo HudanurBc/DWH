@@ -67,29 +67,23 @@ Untersuchung der relativen Syndromhäufigkeit in Abhängigkeit von der monatlich
 ## ERM
 
 Im Folgenden ist das ER-Diagramm dargestellt. Es zeigt ein Sternschema des Data Warehouses, bestehend aus einer zentralen Faktentabelle und vier Dimensionstabellen. Die AKTIN-Notaufnahmedaten und die Wetterdaten wurden über die gemeinsamen Zeitattribute Jahr und Monat verknüpft und zusammengeführt.
-![ERM](docs/img/ERM.png)
+<p align="center">
+  <img src="docs/img/ERM.png" width="60%" alt="ERM">
+</p>
 Die enthaltenen Attribute in der Faktentabelle haben folgende Bedeutung:
-- relative_cases: 
 
-relativer Anteil der beobachteten Fälle eines Syndroms im Verhältnis zur Gesamtzahl der gemeldeten Notaufnahmefälle.
-- relative_cases_7day_ma:
+- **relative_cases:** relativer Anteil der beobachteten Fälle eines Syndroms im Verhältnis zur Gesamtzahl der gemeldeten Notaufnahmefälle.
 
-geglätteter Wert der relativen Fallzahlen auf Basis eines gleitenden 7-Tage-Mittels.
-- expected_value:
+- **relative_cases_7day_ma:** geglätteter Wert der relativen Fallzahlen auf Basis eines gleitenden 7-Tage-Mittels.
 
-erwarteter Referenzwert der relativen Fallzahlen basierend auf historischen Vergleichsdaten.
-- expected_lowerbound / expected_upperbound:
+- **expected_value:** erwarteter Referenzwert der relativen Fallzahlen basierend auf historischen Vergleichsdaten.
 
-untere und obere Grenze des erwarteten Wertebereichs zur Einordnung von Abweichungen.
-- ed_count:
+- **expected_lowerbound / expected_upperbound:** untere und obere Grenze des erwarteten Wertebereichs zur Einordnung von Abweichungen.
+  
+- **ed_count:** durchschnittliche Anzahl der in die Surveillance einbezogenen Notaufnahmen im betrachteten Monat.
+  
+- **temperature_mean:** durchschnittliche monatliche Lufttemperatur in Deutschland.
+  
+- **precipitation:** durchschnittliche monatliche Niederschlagsmenge.
 
-durchschnittliche Anzahl der in die Surveillance einbezogenen Notaufnahmen im betrachteten Monat.
-- temperature_mean:
-
-durchschnittliche monatliche Lufttemperatur in Deutschland.
-- precipitation:
-
-durchschnittliche monatliche Niederschlagsmenge.
-- sunshine_duration:
-
-durchschnittliche monatliche Sonnenscheindauer.
+- **sunshine_duration:** durchschnittliche monatliche Sonnenscheindauer.
