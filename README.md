@@ -43,8 +43,9 @@ Zu beachten ist, dass Superset mindestens 60 Sekunden braucht, um zu starten, da
 Superset ist erreichbar unter:
 http://localhost:8088/superset/welcome/
 
-username: admin
-passwort: admin
+Superset: username: admin; passwort: admin
+
+Adminer und Postgres: server: db ; Datenbank: mydb ; username: admin ; passwort: passwort
 
 Im Projektroot ausführen:
 
