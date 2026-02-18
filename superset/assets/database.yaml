@@ -1,5 +1,5 @@
 databases:
   - database_name: DWH
-    sqlalchemy_uri: postgresql+psycopg2://{{ env.POSTGRES_USER }}:{{ env.POSTGRES_PASSWORD }}@db:{{ env.POSTGRES_PORT }}/{{ env.POSTGRES_DB }}
+    sqlalchemy_uri: postgresql+psycopg2://admin:passwort@db:5432/mydb
     expose_in_sqllab: true
     allow_run_async: false
