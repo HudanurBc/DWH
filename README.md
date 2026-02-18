@@ -31,6 +31,8 @@ databases:
     expose_in_sqllab: true
     allow_run_async: false
 
+beachte: wenn die .env geändert wird, dann scheitert der Import des Dashboards auf Superset
+
 ---
 
 ## Installation / Start
